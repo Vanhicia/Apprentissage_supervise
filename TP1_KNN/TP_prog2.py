@@ -24,32 +24,49 @@ print(clf.predict(xtest)[4])
 
 print(clf.score(xtest, ytest))
 
-# faire varier le nombre de voisins k
 # méthode : k-fold cross validation
-kf = model_selection.KFold(n_splits=10, shuffle=True)
-scores = []
-for k in range (2,16):
-    print('k: ', k)
+def get_score_with_kfold(dataset, n_fold, n_neighbors):
+    kf = model_selection.KFold(n_splits=n_fold, shuffle=True)
     num_fold = 0
     score = 0
-    for train_index, test_index in kf.split(data):
+    for train_index, test_index in kf.split(dataset):
         num_fold += 1
-        print('Start KFold number %d from %d'%(num_fold, 10))
-        print('Split train: ', len(train_index))
-        print('Split valid: ', len(test_index))
         xtrain = data[train_index]
         ytrain = target[train_index]
         xtest = data[test_index]
         ytest = target[test_index]
-        clf = neighbors.KNeighborsClassifier(k)
+        clf = neighbors.KNeighborsClassifier(n_neighbors)
         clf.fit(xtrain, ytrain)
         score += clf.score(xtest, ytest)
-        print('score =', clf.score(xtest, ytest))
     score /= num_fold
+    return score
+
+# faire varier le nombre de voisins k
+"""scores = []
+for k in range (2,16):
+    score = get_score_with_kfold(data, 10, k)
+    print('Score pour %d voisins : %f'%(k, score))
     scores.append(score)
 
-plt.plot(range(2,16),scores)
+plt.plot(range(2,16), scores)
 plt.xlabel("Nombre de voisins k")
 plt.ylabel("Score")
 plt.title("Estimation de la fiabilité en fonction de k :")
+plt.show()"""
 
+# faire varier le pourcentage
+k = 6
+scores = []
+for percent in np.arange(0.1, 1, 0.1):
+    xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=percent)
+    clf = neighbors.KNeighborsClassifier(k)
+    clf.fit(xtrain, ytrain)
+    score = clf.score(xtest, ytest)
+    print('Echantillon training : %f, score: %f'%(percent, score))
+    scores.append(score)
+
+plt.plot(np.arange(0.1, 1, 0.1), scores)
+plt.xlabel("Pourcentage de l'échantillon training")
+plt.ylabel("Score")
+plt.title("Fiabilité en fonction du pourcentage de l'échantillon de training :")
+plt.show()
