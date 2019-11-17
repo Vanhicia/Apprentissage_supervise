@@ -1,35 +1,50 @@
 from sklearn.datasets import fetch_openml
-from sklearn import datasets
-import matplotlib.pyplot as plt
 from sklearn import neighbors
 from sklearn import model_selection
 
+import matplotlib.pyplot as plt
+
 mnist = fetch_openml('mnist_784')
 
-#print(mnist)
-#print (mnist.data)
-#print (mnist.target)
-#print(len(mnist.data))
-#help(len)
-#print (mnist.data.shape)
-#print (mnist.target.shape)
-#print(mnist.data[0])
-#print(mnist.data[0][1])
-#print(mnist.data[:,1])
-#print(mnist.data[:100])
+# -------------------------------------------
+# Comprendre des propriétés du dataset mnist
+# -------------------------------------------
+print(mnist)
+print(mnist.data)
+print(mnist.target)
+len(mnist.data)
+help(len)
+print(mnist.data.shape)
+print(mnist.target.shape)
+mnist.data[0]
+mnist.data[0][1]
+mnist.data[:,1]
+mnist.data[:100]
 
+
+# -------------------------------------------
+# Visualiser les données
+# -------------------------------------------
 images = mnist.data.reshape((-1, 28, 28))
 plt.imshow(images[0],cmap=plt.cm.gray_r,interpolation="nearest")
-#plt.show()
-#affiche la classe de l'image
-#print(mnist.target[0])
+plt.show()
 
-k = 5
-percent = 0.7
-xtrain, xtest, ytrain, ytest = model_selection.train_test_split(mnist.data, mnist.target, train_size=percent)
-clf = neighbors.KNeighborsClassifier (k)
-clf.fit(xtrain, ytrain)
-print("train OK")
-clf.predict(xtest)
-clf.predict_proba(xtest)
-clf.score(xtest, ytest)
+# Affiche la classe de l'image
+print(mnist.target[0])
+
+
+# -------------------------------------------
+# Explorer d'autres jeux de données
+# -------------------------------------------
+mauna = fetch_openml('mauna-loa-atmospheric-co2')
+print(mauna)
+print(mauna.data)
+print(mauna.target)
+len(mauna.data)
+help(len)
+print(mauna.data.shape)
+print(mauna.target.shape)
+mauna.data[0]
+mauna.data[0][1]
+mauna.data[:,1]
+mauna.data[:100]
