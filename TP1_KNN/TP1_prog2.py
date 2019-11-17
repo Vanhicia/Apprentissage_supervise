@@ -17,7 +17,7 @@ target = mnist.target[index_vect]
 # --------------------------------------------------------------------
 
 xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=0.8)
-'''
+
 # ----------------- Test avec K = 10 -----------------
 clf = neighbors.KNeighborsClassifier(10)
 clf.fit(xtrain, ytrain)
@@ -125,7 +125,7 @@ plt.ylabel("Score")
 plt.title("Fiabilité en fonction du type de distance :")
 plt.show()
 
-'''
+
 # -------- Analyse du temps pour n_job à 1 et -1 -------
 for i in [-1,1]:
 	time_start = time()
