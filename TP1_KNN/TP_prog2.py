@@ -54,8 +54,8 @@ plt.ylabel("Score")
 plt.title("Estimation de la fiabilité en fonction de k :")
 plt.show()"""
 
-# faire varier le pourcentage
-k = 6
+# faire varier le pourcentage training/test
+"""k = 6
 scores = []
 for percent in np.arange(0.1, 1, 0.1):
     xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=percent)
@@ -69,4 +69,38 @@ plt.plot(np.arange(0.1, 1, 0.1), scores)
 plt.xlabel("Pourcentage de l'échantillon training")
 plt.ylabel("Score")
 plt.title("Fiabilité en fonction du pourcentage de l'échantillon de training :")
+plt.show()"""
+
+# faire varier la taille de l'échantillon training
+"""k = 6
+scores = []
+tailles = []
+for percent in np.arange(0.1, 0.9, 0.1):
+    xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=percent, test_size=0.2)
+    clf = neighbors.KNeighborsClassifier(k)
+    clf.fit(xtrain, ytrain)
+    score = clf.score(xtest, ytest)
+    print('Echantillon training : %f, score: %f'%(percent, score))
+    scores.append(score)
+    tailles.append(xtrain.shape[0])
+
+plt.plot(tailles, scores)
+plt.xlabel("Taille de l'échantillon training")
+plt.ylabel("Score")
+plt.title("Fiabilité en fonction de la taille de l'échantillon training :")
+plt.show()"""
+
+# faire varier le type de distance p
+k = 6
+scores = []
+for p in range(1, 11):
+    n_split = 8  # test sample = 20 %
+    score = get_score_with_kfold(data, n_split, k)
+    print('Type de distance p : %d, score: %f'%(p, score))
+    scores.append(score)
+
+plt.plot(range(1,11), scores)
+plt.xlabel("Type de distance p")
+plt.ylabel("Score")
+plt.title("Fiabilité en fonction du type de distance :")
 plt.show()
