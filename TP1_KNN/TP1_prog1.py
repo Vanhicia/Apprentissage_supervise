@@ -25,12 +25,13 @@ mnist.data[:100]
 # -------------------------------------------
 # Visualiser les données
 # -------------------------------------------
+# Affiche l'image
 images = mnist.data.reshape((-1, 28, 28))
 plt.imshow(images[0],cmap=plt.cm.gray_r,interpolation="nearest")
 plt.show()
 
 # Affiche la classe de l'image
-print(mnist.target[0])
+print("Classe de l'image : " + str(mnist.target[0]))
 
 
 # -------------------------------------------
