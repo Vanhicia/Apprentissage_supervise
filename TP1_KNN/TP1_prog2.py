@@ -31,20 +31,21 @@ print("Taux d'erreur : " + str((1-score)*100) + " %")
 
 # --------- Méthode : k-fold cross validation -------- 
 def get_score_with_kfold(data, n_fold, k):
-	kf = model_selection.KFold(n_splits=n_fold, shuffle=True)
-	num_fold = 0
-	score = 0
-	for train_index, test_index in kf.split(data):
-		num_fold += 1
-		xtrain = data[train_index]
-		ytrain = target[train_index]
-		xtest = data[test_index]
-		ytest = target[test_index]
-		clf = neighbors.KNeighborsClassifier(k)
-		clf.fit(xtrain, ytrain)
-		score += clf.score(xtest, ytest)
-	score /= num_fold
-	return score
+    kf = model_selection.KFold(n_splits=n_fold, shuffle=True)
+    num_fold = 0
+    score = 0
+    for train_index, test_index in kf.split(data):
+        num_fold += 1
+        xtrain = data[train_index]
+        ytrain = target[train_index]
+        xtest = data[test_index]
+        ytest = target[test_index]
+        clf = neighbors.KNeighborsClassifier(k)
+        clf.fit(xtrain, ytrain)
+        clf.predict(xtest)
+        score += clf.score(xtest, ytest)
+    score /= num_fold
+    return score
 
 
 
@@ -66,12 +67,13 @@ plt.show()
 k = 3
 scores = []
 for percent in np.arange(0.1, 1, 0.1):
-	xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=percent)
-	clf = neighbors.KNeighborsClassifier(k)
-	clf.fit(xtrain, ytrain)
-	score = clf.score(xtest, ytest)
-	print("Echantillon training : {} / Score : {}".format(percent, score))
-	scores.append(score)
+    xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=percent)
+    clf = neighbors.KNeighborsClassifier(k)
+    clf.fit(xtrain, ytrain)
+    clf.predict(xtest)
+    score = clf.score(xtest, ytest)
+    print("Echantillon training : {} / Score : {}".format(percent, score))
+    scores.append(score)
     
 
 plt.plot(np.arange(0.1, 1, 0.1), scores)
@@ -86,16 +88,17 @@ k = 3
 scores = []
 tailles = []
 for taille in range(5000, 15000, 1000):
-	index_vect = np.random.randint(70000, size=taille)
-	data = mnist.data[index_vect]
-	target = mnist.target[index_vect]
-	xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=0.8)
-	clf = neighbors.KNeighborsClassifier(k)
-	clf.fit(xtrain, ytrain)
-	score = clf.score(xtest, ytest)
-	print("Taille de l'échantillon training : {} / Score : {}".format(taille, score))
-	scores.append(score)
-	tailles.append(taille)
+    index_vect = np.random.randint(70000, size=taille)
+    data = mnist.data[index_vect]
+    target = mnist.target[index_vect]
+    xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=0.8)
+    clf = neighbors.KNeighborsClassifier(k)
+    clf.fit(xtrain, ytrain)
+    clf.predict(xtest)
+    score = clf.score(xtest, ytest)
+    print("Taille de l'échantillon training : {} / Score : {}".format(taille, score))
+    scores.append(score)
+    tailles.append(taille)
 
 plt.plot(tailles, scores)
 plt.xlabel("Taille de l'échantillon training")
@@ -113,11 +116,12 @@ target = mnist.target[index_vect]
 xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=0.8)
 
 for p in range(1, 11):
-	clf = neighbors.KNeighborsClassifier(k, p=p)
-	clf.fit(xtrain, ytrain)
-	score = clf.score(xtest, ytest)
-	print("Type de distance p : {} / Score : {}".format(p, score))
-	scores.append(score)
+    clf = neighbors.KNeighborsClassifier(k, p=p)
+    clf.fit(xtrain, ytrain)
+    clf.predict(xtest)
+    score = clf.score(xtest, ytest)
+    print("Type de distance p : {} / Score : {}".format(p, score))
+    scores.append(score)
 
 plt.plot(range(1,11), scores)
 plt.xlabel("Type de distance p")
@@ -129,9 +133,10 @@ plt.show()
 # -------- Analyse du temps pour n_job à 1 et -1 -------
 k = 3
 for i in [-1,1]:
-	time_start = time()
-	clf = neighbors.KNeighborsClassifier(k,n_jobs=i)
-	clf.fit(xtrain, ytrain)
-	score = clf.score(xtest, ytest)
-	time_stop = time()
-	print("Valeur de n_jobs : {} / Temps total : {}".format(i,time_stop-time_start))
+    time_start = time()
+    clf = neighbors.KNeighborsClassifier(k,n_jobs=i)
+    clf.fit(xtrain, ytrain)
+    clf.predict(xtest)
+    score = clf.score(xtest, ytest)
+    time_stop = time()
+    print("Valeur de n_jobs : {} / Temps total : {}".format(i,time_stop-time_start))
