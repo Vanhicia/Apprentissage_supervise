@@ -1,14 +1,24 @@
 from sklearn.datasets import fetch_openml
 from sklearn import model_selection
 import numpy as np
-from sklearn.neural_network imoort MLPClassifier
+from sklearn import neural_network
+from sklearn import metrics
 
 mnist = fetch_openml('mnist_784')
 
-xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=0.8)
+percent = 0.7
 
-# varier 10 fois le nombre de couches
-# 7 neurones par couches
-# puis diminuer le nombre de neurones sur les dernières couches : 50 sur la première couvhe et 10 à la fin
+xtrain, xtest, ytrain, ytest = model_selection.train_test_split(mnist, train_size=percent)
 
-clf = MLPClassifier()hidden_layer_sizes = (50))
+
+clf = neural_network.MLPClassifier(hidden_layer_sizes=(50))
+clf.fit(xtrain, ytrain)
+ypred = clf.predict(ytrain)
+
+precision = metrics.precision_score(ytest, ypred, average='micro')
+print("Precision :" + str(precision))
+
+print("Classe de l'image 4 : " + str(ytest[4]))
+print("Classe prédite de l'image 4 : " + str(clf.predict(xtest)[4]))
+
+
