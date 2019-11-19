@@ -1,49 +1,49 @@
-Classe de l'image 4 : 1
-Classe prédite de l'image 4 : 1
-Score : 0.922
-Taux d'erreur : 7.799999999999995 %
-Score pour 2 voisins : 0.9263999999999999
-Score pour 3 voisins : 0.9346
-Score pour 4 voisins : 0.9292
-Score pour 5 voisins : 0.9288000000000001
-Score pour 6 voisins : 0.9303999999999999
-Score pour 7 voisins : 0.9258000000000001
-Score pour 8 voisins : 0.9258000000000001
-Score pour 9 voisins : 0.9234
-Score pour 10 voisins : 0.9218
-Score pour 11 voisins : 0.9188000000000001
-Score pour 12 voisins : 0.9172
-Score pour 13 voisins : 0.9122
-Score pour 14 voisins : 0.9116
-Score pour 15 voisins : 0.9112
-Echantillon training : 0.1 / Score : 0.8168888888888889
-Echantillon training : 0.2 / Score : 0.86225
-Echantillon training : 0.30000000000000004 / Score : 0.8888571428571429
-Echantillon training : 0.4 / Score : 0.9003333333333333
-Echantillon training : 0.5 / Score : 0.9056
-Echantillon training : 0.6 / Score : 0.9055
-Echantillon training : 0.7000000000000001 / Score : 0.9126666666666666
-Echantillon training : 0.8 / Score : 0.932
-Echantillon training : 0.9 / Score : 0.944
-Taille de l'échantillon training : 5000 / Score: 0.926
-Taille de l'échantillon training : 6000 / Score: 0.9225
-Taille de l'échantillon training : 7000 / Score: 0.9321428571428572
-Taille de l'échantillon training : 8000 / Score: 0.946875
-Taille de l'échantillon training : 9000 / Score: 0.945
-Taille de l'échantillon training : 10000 / Score: 0.937
-Taille de l'échantillon training : 11000 / Score: 0.9490909090909091
-Taille de l'échantillon training : 12000 / Score: 0.9445833333333333
-Taille de l'échantillon training : 13000 / Score: 0.9476923076923077
-Taille de l'échantillon training : 14000 / Score: 0.9489285714285715
-Type de distance p : 1 / Score: 0.907
-Type de distance p : 2 / Score: 0.922
-Type de distance p : 3 / Score: 0.924
-Type de distance p : 4 / Score: 0.928
-Type de distance p : 5 / Score: 0.93
-Type de distance p : 6 / Score: 0.931
-Type de distance p : 7 / Score: 0.936
-Type de distance p : 8 / Score: 0.936
-Type de distance p : 9 / Score: 0.935
-Type de distance p : 10 / Score: 0.933
-Valeur de n_jobs : -1 / Temps total : 2.1162188053131104
-Valeur de n_jobs : 1 / Temps total : 6.677932024002075
+Classe de l'image 4 : 7
+Classe prédite de l'image 4 : 7
+Score : 0.918
+Taux d'erreur : 8.199999999999996 %
+Score pour 2 voisins : 0.9158
+Score pour 3 voisins : 0.9252
+Score pour 4 voisins : 0.9234
+Score pour 5 voisins : 0.9244
+Score pour 6 voisins : 0.9214
+Score pour 7 voisins : 0.9232000000000001
+Score pour 8 voisins : 0.9223999999999999
+Score pour 9 voisins : 0.9214
+Score pour 10 voisins : 0.9216
+Score pour 11 voisins : 0.9174000000000001
+Score pour 12 voisins : 0.9179999999999999
+Score pour 13 voisins : 0.9192
+Score pour 14 voisins : 0.9162000000000001
+Score pour 15 voisins : 0.914
+Echantillon training : 0.1 / Score : 0.8375555555555556
+Echantillon training : 0.2 / Score : 0.87975
+Echantillon training : 0.30000000000000004 / Score : 0.8997142857142857
+Echantillon training : 0.4 / Score : 0.9096666666666666
+Echantillon training : 0.5 / Score : 0.9124
+Echantillon training : 0.6 / Score : 0.914
+Echantillon training : 0.7000000000000001 / Score : 0.9153333333333333
+Echantillon training : 0.8 / Score : 0.918
+Echantillon training : 0.9 / Score : 0.916
+Taille de l'échantillon training : 5000 / Score : 0.936
+Taille de l'échantillon training : 6000 / Score : 0.925
+Taille de l'échantillon training : 7000 / Score : 0.9385714285714286
+Taille de l'échantillon training : 8000 / Score : 0.93625
+Taille de l'échantillon training : 9000 / Score : 0.94
+Taille de l'échantillon training : 10000 / Score : 0.944
+Taille de l'échantillon training : 11000 / Score : 0.9404545454545454
+Taille de l'échantillon training : 12000 / Score : 0.95375
+Taille de l'échantillon training : 13000 / Score : 0.9523076923076923
+Taille de l'échantillon training : 14000 / Score : 0.95
+Type de distance p : 1 / Score : 0.913
+Type de distance p : 2 / Score : 0.927
+Type de distance p : 3 / Score : 0.925
+Type de distance p : 4 / Score : 0.929
+Type de distance p : 5 / Score : 0.926
+Type de distance p : 6 / Score : 0.925
+Type de distance p : 7 / Score : 0.926
+Type de distance p : 8 / Score : 0.924
+Type de distance p : 9 / Score : 0.924
+Type de distance p : 10 / Score : 0.924
+Valeur de n_jobs : -1 / Temps total : 2.450014591217041
+Valeur de n_jobs : 1 / Temps total : 5.884091138839722

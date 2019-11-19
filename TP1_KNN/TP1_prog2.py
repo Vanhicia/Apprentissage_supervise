@@ -63,7 +63,7 @@ plt.show()
 
 
 # ------ Variation du pourcentage training/test -----
-k = 6
+k = 3
 scores = []
 for percent in np.arange(0.1, 1, 0.1):
 	xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=percent)
@@ -82,7 +82,7 @@ plt.show()
 
 
 # ---- Variation de la taille de l'échantillon training ----
-k = 6
+k = 3
 scores = []
 tailles = []
 for taille in range(5000, 15000, 1000):
@@ -105,7 +105,7 @@ plt.show()
 
 
 # -------- Variation des types de distance p -------
-k = 6
+k = 3
 scores = []
 index_vect = np.random.randint(70000, size=5000)
 data = mnist.data[index_vect]
@@ -127,9 +127,10 @@ plt.show()
 
 
 # -------- Analyse du temps pour n_job à 1 et -1 -------
+k = 3
 for i in [-1,1]:
 	time_start = time()
-	clf = neighbors.KNeighborsClassifier(3,n_jobs=i)
+	clf = neighbors.KNeighborsClassifier(k,n_jobs=i)
 	clf.fit(xtrain, ytrain)
 	score = clf.score(xtest, ytest)
 	time_stop = time()
