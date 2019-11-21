@@ -13,7 +13,7 @@ target = mnist.target[index_vect]
 
 
 # --------------------------------------------------------------------
-# Test avec une BDD à 80% pour l’apprentissage et 20% pour les tests
+# Test avec un training à 80% pour l’apprentissage et 20% pour les tests
 # --------------------------------------------------------------------
 
 xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=0.8)
