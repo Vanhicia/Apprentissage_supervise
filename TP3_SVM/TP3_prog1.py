@@ -21,17 +21,20 @@ xtrain, xtest, ytrain, ytest = model_selection.train_test_split(minst.data, mins
 for noyau in ['linear','poly','rbf','sigmoid','precomputed']:
 	classifier = SVC(gamma='auto', kernel=noyau) 
 	classifier.fit(xtrain, ytrain)
-	predicted = classifier.predict(xtest)
+	ypredict = classifier.predict(xtest)
 	score = classifier.score(xtest, ytest)
 	print("Score : " + str(score))
 
+    
 # ------ Variation du paramètre de tolerance aux erreurs C ---------
 erreur = []
+cm = []
 for tolerancce in [0.1,0.3,0.5,0.7,1.0]:
     clsvm = SVC(gamma='auto', kernel='poly' ,C=tolerancce)
     clsvm.fit(xtrain, ytrain)
-    predicted = clsvm.predict(xtest) 
-    erreur.append(metrics.zero_one_loss(ytest, predicted))
+    ypredict = clsvm.predict(xtest) 
+    erreur.append(metrics.zero_one_loss(ytest, ypredict))
+    cm.append(confusion_matrix(ytest, ypredict))
 print(erreur)
 plt.plot([0.1,0.3,0.5,0.7,1.0], erreur)
 plt.xlabel("Valeur de C")
@@ -39,31 +42,40 @@ plt.ylabel("Erreur de classification")
 plt.title("Erreur de classification sur les données d’entrainement et de test en fonction de C")
 plt.show()
 
-
-#TODO
-cm = confusion_matrix(ytest, Y_pred)
 print(cm)
+plt.plot([0.1,0.3,0.5,0.7,1.0], cm)
+plt.xlabel("Valeur de C")
+plt.ylabel("Matrice de confusion")
+plt.title("Matrice de confusion en fonction de C")
+plt.show()
+
 
 # -------------------------------- Variation de la fonction noyau et de C --------------------------------
 # Analyse du temps d'apprentissage, de la précision, du rappel, de l'erreur et de la matrice de confusion 
 
-# il faut prendre le temps en cpu et non en temps "normal" (ne pas tenir compte de cette remarque pour TP1): time.clock()
+# Variation de la fonction noyau
 for noyau in ['linear','poly','rbf','sigmoid','precomputed']:
     erreur = []
     temps = []
     precision = []
     rappel = []
+    cm = []
+    
+    # Variation de C
     for tolerancce in [0.1,0.3,0.5,0.7,1.0]:
-        time_start = time.process_time
+        time_start = time.process_time() # On regarde le temps CPU
         clsvm = SVC(kernel=noyau, C=tolerancce)
         clsvm.fit(xtrain, ytrain)
-        predicted = clsvm.predict(xtest) 
-        time_stop = time.process_time
+        ypredict = clsvm.predict(xtest) 
+        time_stop = time.process_time()
         temps.append(time_stop-time_start)
-        erreur.append(metrics.zero_one_loss(ytest, predicted))
-        precision.append(metrics.precision_score(ytest, predicted,average='micro'))
-        rappel.append(metrics.recall_score(ytest, predicted,average='micro'))
-    for type_analyse in ["Erreur", "Temps", "Précision", "Rappel"]:
+        erreur.append(metrics.zero_one_loss(ytest, ypredict))
+        precision.append(metrics.precision_score(ytest, ypredict,average='micro'))
+        rappel.append(metrics.recall_score(ytest, ypredict,average='micro'))
+        cm.append(confusion_matrix(ytest, ypredict))
+        
+    # Affichage des différentes courbes
+    for type_analyse in ["Erreur", "Temps", "Précision", "Rappel", "Matrice de confusion"]:
 			if(type_analyse == "Erreur"):
 				content = erreur
 				ylabel = "Erreur de classification"
@@ -73,9 +85,12 @@ for noyau in ['linear','poly','rbf','sigmoid','precomputed']:
 			elif(type_analyse == "Precision"):
 				content = precision
 				ylabel = "Precision"
-			else:
+			elif(type_anayse == "Rappel"):
 				content = rappel
 				ylabel = "Rappel"
+            else:
+                content = cm
+                ylabel = "Matrice de confusion"
 			print("Noyau : "+ noyau + " / "+ type_analyse +" : " + str(content))
 			plt.plot([0.1,0.3,0.5,0.7,1.0], erreur)
 			plt.xlabel("Valeur de C")
@@ -85,8 +100,7 @@ for noyau in ['linear','poly','rbf','sigmoid','precomputed']:
 
 
 
-#accès cluster : ssh nom@srv-ens-calcul.insa-touluse.fr
-#Todo : matrice de confusion pour toutes les méthodes  + precomputed pour SVM
+#Todo : precomputed pour SVM
 
 
 
