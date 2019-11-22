@@ -14,7 +14,7 @@ mnist = fetch_openml('mnist_784')
 # Test avec un training à 70% pour l’apprentissage et 30% pour les tests
 # --------------------------------------------------------------------
 
-xtrain, xtest, ytrain, ytest = model_selection.train_test_split(minst.data, mnist.target, train_size=0.7)
+xtrain, xtest, ytrain, ytest = model_selection.train_test_split(mnist.data, mnist.target, train_size=0.7)
 
 # ----------------- Variation de la fonction noyau -----------------
 for noyau in ['linear','poly','rbf','sigmoid','precomputed']:
