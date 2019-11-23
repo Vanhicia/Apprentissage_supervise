@@ -132,4 +132,47 @@ for function in ['identity', 'logistic', 'tanh', 'relu']:
 
 
 # ------- Variation de la valeur de la régularisation L2 --------------
+tup = ()
+count = 0
+while(count < 10): 
+    tup += (50,)
+    count +=1
+print(tup)
 
+erreur = []
+temps = []
+precision = []
+rappel = []
+
+for a in np.linspace(0.0001, 0.0005, 5, endpoint=True):
+    
+    xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=percent)
+    clf = neural_network.MLPClassifier(hidden_layer_sizes=tup, alpha=a)
+    time_start = time.process_time() # On regarde le temps CPU
+    clf.fit(xtrain, ytrain)
+    ypred = clf.predict(xtest)
+    time_stop = time.process_time()
+    temps.append(time_stop-time_start)
+    erreur.append(metrics.zero_one_loss(ytest, ypred))
+    precision.append(metrics.precision_score(ytest, ypred,average='micro'))
+    rappel.append(metrics.recall_score(ytest, ypred,average='micro'))
+
+for type_analyse in ["Erreur", "Temps", "Précision", "Rappel"]:
+    if(type_analyse == "Erreur"):
+        content = erreur
+        ylabel = "Erreur de classification"
+    elif(type_analyse == "Temps"):
+        content = temps
+        ylabel = "Temps d'apprentissage"
+    elif(type_analyse == "Precision"):
+        content = precision
+        ylabel = "Precision"
+    else:
+        content = rappel
+        ylabel = "Rappel"
+    print(type_analyse +" : " + str(content))
+    plt.plot(np.linspace(0.0001, 1, 20, endpoint=True), content)
+    plt.xlabel("Valeur de alpha")
+    plt.ylabel(ylabel)
+    plt.title(type_analyse +" en fonction de alpha")
+    plt.show()
