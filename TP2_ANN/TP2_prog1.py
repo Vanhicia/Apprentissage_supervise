@@ -31,36 +31,78 @@ print("Classe prédite de l'image 4 : " + str(clf.predict(xtest)[4]))
 
 
 # ----------------- Variation du nombre de couches  -----------------
-tup = ()
+erreur = []
+temps = []
+precision = []
+rappel = []
+
 for nb_couches in range(1,101,10):
+    tup = ()
     count = 0
     while(count < nb_couches): 
         tup += (50,)
         count += 1
+    print("tup = {}".format(tup))
     xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=percent)
     clf = neural_network.MLPClassifier(hidden_layer_sizes=tup)
+    time_start = time.process_time() # On regarde le temps CPU
     clf.fit(xtrain, ytrain)
     ypred = clf.predict(xtest)
+    time_stop = time.process_time()
+    temps.append(time_stop-time_start)
+    erreur.append(metrics.zero_one_loss(ytest, ypredict))
+    precision.append(metrics.precision_score(ytest, ypredict,average='micro'))
+    rappel.append(metrics.recall_score(ytest, ypredict,average='micro'))
 
-    precision = metrics.precision_score(ytest, ypred, average='micro')
-    print("Precision pour {} couches de 50 neurones : {}".format(nb_couches,precision))
-
+for type_analyse in ["Erreur", "Temps", "Précision", "Rappel"]:
+    if(type_analyse == "Erreur"):
+        content = erreur
+        ylabel = "Erreur de classification"
+    elif(type_analyse == "Temps"):
+        content = temps
+        ylabel = "Temps d'apprentissage"
+    elif(type_analyse == "Precision"):
+        content = precision
+        ylabel = "Precision"
+    else:
+        content = rappel
+        ylabel = "Rappel"
+    print(type_analyse +" : " + str(content))
+    plt.plot(np.linspace(0.0001, 1, 20, endpoint=True), content)
+    plt.xlabel("Nombre de couches")
+    plt.ylabel(ylabel)
+    plt.title(type_analyse +" en fonction du nombre de couches")
+    plt.show()
 
 # ---------------- Variation du nombre de neurones  ----------------
 nb_couches = [2, 10, 20, 50, 100]
 for nb in nb_couches :
     tup = ()
-    for nb_neurones in np.linspace(60, 11, nb, endpoint=False):
+    for nb_neurones in np.linspace(60, 11, nb, endpoint=True):
         tup += (math.ceil(nb_neurones),)
     print("tup = {}".format(tup))
+    
     xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=percent)
     clf = neural_network.MLPClassifier(hidden_layer_sizes=tup)
+    time_start = time.process_time() # On regarde le temps CPU
     clf.fit(xtrain, ytrain)
     ypred = clf.predict(xtest)
-    precision = metrics.precision_score(ytest, ypred, average='micro')
-    print("Precision pour {} couches de 60 à 11 neurones : {}".format(nb, precision))
-
-
+    time_stop = time.process_time()
+    temps = time_stop-time_start
+    erreur = metrics.zero_one_loss(ytest, ypredict)
+    precision = metrics.precision_score(ytest, ypredict,average='micro')
+    rappel = metrics.recall_score(ytest, ypredict,average='micro')
+    print("Nombre de couches : "+ str(nb))
+    for type_analyse in ["Erreur", "Temps", "Précision", "Rappel"]:
+        if(type_analyse == "Erreur"):
+            content = erreur
+        elif(type_analyse == "Temps"):
+            content = temps
+        elif(type_analyse == "Precision"):
+            content = precision
+        else:
+            content = rappel
+        print(type_analyse +" : " + str(content))
 
 # ------ Etude la convergence des algorithmes d’optimisation   --------
 tup = ()
