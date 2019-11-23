@@ -214,7 +214,7 @@ for type_analyse in ["Erreur", "Temps", "Précision", "Rappel"]:
         content = rappel
         ylabel = "Rappel"
     print(type_analyse +" : " + str(content))
-    plt.plot(np.linspace(0.0001, 1, 20, endpoint=True), content)
+    plt.plot(np.linspace(0.0001, 0.0005, 5, endpoint=True), content)
     plt.xlabel("Valeur de alpha")
     plt.ylabel(ylabel)
     plt.title(type_analyse +" en fonction de alpha")
