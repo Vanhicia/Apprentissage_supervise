@@ -1,0 +1,63 @@
+Precision :0.9471428571428572
+Classe de l'image 4 : 6
+Classe prédite de l'image 4 : 6
+
+
+# ----------------- Variation du nombre de couches  -----------------
+Precision pour 1 couches de 50 neurones : 0.9427142857142857
+Precision pour 11 couches de 50 neurones : 0.9708571428571429
+Precision pour 21 couches de 50 neurones : 0.8428571428571429
+Precision pour 31 couches de 50 neurones : 0.1118095238095238
+Precision pour 41 couches de 50 neurones : 0.11066666666666666
+Precision pour 51 couches de 50 neurones : 0.11166666666666666
+Precision pour 61 couches de 50 neurones : 0.1149047619047619
+Precision pour 71 couches de 50 neurones : 0.112
+
+
+# ---------------- Variation du nombre de neurones  ----------------
+
+
+
+# ------ Etude la convergence des algorithmes d’optimisation   --------
+(50, 50, 50, 50, 50, 50, 50, 50, 50, 50)
+Algo : lbfgs
+Erreur : 0.044095238095238076
+Temps : 590.0
+Précision : 0.9559047619047619
+Rappel : 0.9559047619047619
+Algo : sgd
+Erreur : 0.03761904761904766
+Temps : 481.984375
+Précision : 0.9623809523809523
+Rappel : 0.9623809523809523
+Algo : adam
+Erreur : 0.02928571428571425
+Temps : 555.96875
+Précision : 0.9707142857142858
+Rappel : 0.9707142857142858
+
+# ------------- Variation des fonctions d’activation   ----------------
+(50, 50, 50, 50, 50, 50, 50, 50, 50, 50)
+Fonction d'activation : identity
+Erreur : 0.08752380952380956
+Temps : 829.671875
+Précision : 0.9124761904761904
+Rappel : 0.9124761904761904
+Fonction d'activation : logistic
+Erreur : 0.8845238095238095
+Temps : 143.921875
+Précision : 0.11547619047619048
+Rappel : 0.11547619047619048
+Fonction d'activation : tanh
+Erreur : 0.06233333333333335
+Temps : 451.046875
+Précision : 0.9376666666666666
+Rappel : 0.9376666666666666
+Fonction d'activation : relu
+Erreur : 0.03161904761904766
+Temps : 349.359375
+Précision : 0.9683809523809523
+Rappel : 0.9683809523809523
+
+
+# ------- Variation de la valeur de la régularisation L2 --------------
