@@ -4,6 +4,7 @@ from sklearn import neural_network
 from sklearn import metrics
 
 import math
+import matplotlib.pyplot as plt
 import numpy as np
 import time
 
