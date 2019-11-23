@@ -62,14 +62,14 @@ for type_analyse in ["Erreur", "Temps", "Précision", "Rappel"]:
     elif(type_analyse == "Temps"):
         content = temps
         ylabel = "Temps d'apprentissage"
-    elif(type_analyse == "Precision"):
+    elif(type_analyse == "Précision"):
         content = precision
-        ylabel = "Precision"
+        ylabel = "Précision"
     else:
         content = rappel
         ylabel = "Rappel"
     print(type_analyse +" : " + str(content))
-    plt.plot(np.linspace(0.0001, 1, 20, endpoint=True), content)
+    plt.plot(range(1,101,10), content)
     plt.xlabel("Nombre de couches")
     plt.ylabel(ylabel)
     plt.title(type_analyse +" en fonction du nombre de couches")
@@ -99,7 +99,7 @@ for nb in nb_couches :
             content = erreur
         elif(type_analyse == "Temps"):
             content = temps
-        elif(type_analyse == "Precision"):
+        elif(type_analyse == "Précision"):
             content = precision
         else:
             content = rappel
@@ -133,7 +133,7 @@ for algo in ['lbfgs', 'sgd', 'adam']:
             content = erreur
         elif(type_analyse == "Temps"):
             content = temps
-        elif(type_analyse == "Precision"):
+        elif(type_analyse == "Précision"):
             content = precision
         else:
             content = rappel
@@ -167,7 +167,7 @@ for function in ['identity', 'logistic', 'tanh', 'relu']:
             content = erreur
         elif(type_analyse == "Temps"):
             content = temps
-        elif(type_analyse == "Precision"):
+        elif(type_analyse == "Précision"):
             content = precision
         else:
             content = rappel
@@ -207,9 +207,9 @@ for type_analyse in ["Erreur", "Temps", "Précision", "Rappel"]:
     elif(type_analyse == "Temps"):
         content = temps
         ylabel = "Temps d'apprentissage"
-    elif(type_analyse == "Precision"):
+    elif(type_analyse == "Précision"):
         content = precision
-        ylabel = "Precision"
+        ylabel = "Précision"
     else:
         content = rappel
         ylabel = "Rappel"
