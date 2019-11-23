@@ -51,9 +51,9 @@ for nb_couches in range(1,101,10):
     ypred = clf.predict(xtest)
     time_stop = time.process_time()
     temps.append(time_stop-time_start)
-    erreur.append(metrics.zero_one_loss(ytest, ypredict))
-    precision.append(metrics.precision_score(ytest, ypredict,average='micro'))
-    rappel.append(metrics.recall_score(ytest, ypredict,average='micro'))
+    erreur.append(metrics.zero_one_loss(ytest, ypred))
+    precision.append(metrics.precision_score(ytest, ypred,average='micro'))
+    rappel.append(metrics.recall_score(ytest, ypred,average='micro'))
 
 for type_analyse in ["Erreur", "Temps", "Précision", "Rappel"]:
     if(type_analyse == "Erreur"):
@@ -90,9 +90,9 @@ for nb in nb_couches :
     ypred = clf.predict(xtest)
     time_stop = time.process_time()
     temps = time_stop-time_start
-    erreur = metrics.zero_one_loss(ytest, ypredict)
-    precision = metrics.precision_score(ytest, ypredict,average='micro')
-    rappel = metrics.recall_score(ytest, ypredict,average='micro')
+    erreur = metrics.zero_one_loss(ytest, ypred)
+    precision = metrics.precision_score(ytest, ypred,average='micro')
+    rappel = metrics.recall_score(ytest, ypred,average='micro')
     print("Nombre de couches : "+ str(nb))
     for type_analyse in ["Erreur", "Temps", "Précision", "Rappel"]:
         if(type_analyse == "Erreur"):
