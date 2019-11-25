@@ -1,8 +1,12 @@
 from sklearn import metrics
 from sklearn import model_selection
+from sklearn import neighbors
+from sklearn import neural_network
 from sklearn.datasets import fetch_openml
+from sklearn.metrics import confusion_matrix
 from sklearn.svm import SVC
 
+import math
 import matplotlib.pyplot as plt
 import numpy as np
 import time
@@ -40,9 +44,9 @@ def afficher_courbe(erreur,temps,precision,rappel,cm):
         if(type_analyse != "Matrice de confusion"):
             print(type_analyse +" : " + str(content))
             plt.plot(variation, content)
-            plt.xlabel("Valeur de C")
+            plt.xlabel("Taille de l'échantillon")
             plt.ylabel(ylabel)
-            plt.title("Noyau : "+ noyau + " / "+ type_analyse +" en fonction de la taille de l'échantillon")
+            plt.title(type_analyse +" en fonction de la taille de l'échantillon")
             plt.show()
             
             
@@ -57,7 +61,7 @@ for taille in variation:
     data = mnist.data[index_vect]
     target = mnist.target[index_vect]
     xtrain, xtest, ytrain, ytest = model_selection.train_test_split(data, target, train_size=percent)
-    clf = neighbors.KNeighborsClassifier(k=3, p=4, n_jobs=-1)
+    clf = neighbors.KNeighborsClassifier(n_neighbors=3, p=4, n_jobs=-1)
     time_start = time.process_time() # On regarde le temps CPU
     clf.fit(xtrain, ytrain)
     ypred = clf.predict(xtest)
@@ -66,9 +70,9 @@ for taille in variation:
     erreur.append(metrics.zero_one_loss(ytest, ypred))
     precision.append(metrics.precision_score(ytest, ypred,average='micro'))
     rappel.append(metrics.recall_score(ytest, ypred,average='micro'))
-    cm.append(confusion_matrix(ytest, ypredict))
-    afficher_courbe(erreur,temps,precision,rappel,cm)
-    
+    cm.append(confusion_matrix(ytest, ypred))
+afficher_courbe(erreur,temps,precision,rappel,cm)
+
     
 # ----------------- Test avec la méthode MLP -----------------
 erreur = []
@@ -98,9 +102,9 @@ for taille in variation:
     erreur.append(metrics.zero_one_loss(ytest, ypred))
     precision.append(metrics.precision_score(ytest, ypred,average='micro'))
     rappel.append(metrics.recall_score(ytest, ypred,average='micro'))
-    cm.append(confusion_matrix(ytest, ypredict))
-    afficher_courbe(erreur,temps,precision,rappel,cm)
-    
+    cm.append(confusion_matrix(ytest, ypred))
+afficher_courbe(erreur,temps,precision,rappel,cm)
+        
 
 # ----------------- Test avec la méthode SVM -----------------
 erreur = []
@@ -122,9 +126,8 @@ for taille in variation:
     erreur.append(metrics.zero_one_loss(ytest, ypred))
     precision.append(metrics.precision_score(ytest, ypred,average='micro'))
     rappel.append(metrics.recall_score(ytest, ypred,average='micro'))
-    cm.append(confusion_matrix(ytest, ypredict))
-    afficher_courbe(erreur,temps,precision,rappel,cm)
-
+    cm.append(confusion_matrix(ytest, ypred))
+afficher_courbe(erreur,temps,precision,rappel,cm)
 
 
 
