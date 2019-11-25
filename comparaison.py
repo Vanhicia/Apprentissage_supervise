@@ -19,7 +19,7 @@ variation = range(5000, 10000, 500)
 
 
 # ----------------- Méthode pour afficher les courbes -----------------
-def afficher_courbe(erreur,temps,precision,rappel,cm)
+def afficher_courbe(erreur,temps,precision,rappel,cm):
     for type_analyse in ["Erreur", "Temps", "Précision", "Rappel", "Matrice de confusion"]:
         if(type_analyse == "Erreur"):
             content = erreur
@@ -79,10 +79,10 @@ cm = []
 
 nb_couches = 10
 tup = ()
-    count = 0
-    for nb_neurones in np.linspace(60, 11, nb_couches, endpoint=True):
-        tup += (math.ceil(nb_neurones),)
-    print("tup = {}".format(tup))
+count = 0
+for nb_neurones in np.linspace(60, 11, nb_couches, endpoint=True):
+    tup += (math.ceil(nb_neurones),)
+print("tup = {}".format(tup))
     
 for taille in variation:
     index_vect = np.random.randint(70000, size=taille)
